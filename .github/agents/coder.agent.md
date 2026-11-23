@@ -1,7 +1,6 @@
 ---
 name: Coder
 description: Implements code-oriented tasks with clear structure, explicit errors, and testable behavior.
-model: auto
 tools: ['read', 'edit', 'search', 'execute', 'web']
 ---
 

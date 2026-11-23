@@ -75,7 +75,11 @@ require_grep 'exec copilot --allow-all --enable-all-github-mcp-tools' .devcontai
 require_grep '\.vscode/launch\.json' .github/agents/coder.agent.md "Coder agent can create launch configuration when assigned"
 require_grep 'strict JSON with no comments' .github/agents/coder.agent.md "Coder agent creates deterministic launch JSON"
 for agent_file in .github/agents/*.agent.md; do
-  require_grep '^model: auto$' "$agent_file" "$agent_file uses the available automatic model"
+  if grep -q '^model:' "$agent_file"; then
+    fail "$agent_file has an explicit model that may be unavailable"
+  else
+    pass "$agent_file inherits the available Copilot model"
+  fi
 done
 for step_file in .github/steps/1-step.md .github/steps/2-step.md .github/steps/3-step.md .github/steps/4-step.md; do
   require_grep 'copilot --allow-all --enable-all-github-mcp-tools' "$step_file" "$step_file starts Copilot CLI with all GitHub MCP tools"

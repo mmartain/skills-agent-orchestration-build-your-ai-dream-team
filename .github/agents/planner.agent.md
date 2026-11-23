@@ -1,7 +1,6 @@
 ---
 name: Planner
 description: Creates implementation plans by researching the codebase, documentation, dependencies, and edge cases.
-model: auto
 tools: ['read', 'search', 'web']
 ---
 

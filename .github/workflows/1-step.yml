@@ -130,13 +130,13 @@ jobs:
           keyphrase: Designer
           case-sensitive: false
 
-      - name: Check for the automatic model
-        id: check-auto-model
+      - name: Check for Copilot model inheritance
+        id: check-model-inheritance
         continue-on-error: true
         uses: skills/action-keyphrase-checker@v2
         with:
           text-file: docs/agent-team.md
-          keyphrase: auto
+          keyphrase: Copilot
           case-sensitive: false
 
       - name: Check learner references agent definitions
@@ -186,8 +186,8 @@ jobs:
                 passed: ${{ steps.check-coder.outcome == 'success' }}
               - description: "Checked for the Designer role"
                 passed: ${{ steps.check-designer.outcome == 'success' }}
-              - description: "Checked for the automatic model assignment"
-                passed: ${{ steps.check-auto-model.outcome == 'success' }}
+              - description: "Checked for Copilot model inheritance"
+                passed: ${{ steps.check-model-inheritance.outcome == 'success' }}
               - description: "Checked that the summary references .github/agents"
                 passed: ${{ steps.check-agent-definition-reference.outcome == 'success' }}
               - description: "Checked for Project Pulse context"

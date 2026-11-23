@@ -1,7 +1,6 @@
 ---
 name: Orchestrator
 description: Coordinates Planner, Coder, and Designer agents from the GitHub Copilot CLI.
-model: auto
 tools: ['read', 'agent']
 ---
 

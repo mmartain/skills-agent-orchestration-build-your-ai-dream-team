@@ -58,7 +58,7 @@ The custom agent definitions are already available in `.github/agents/`. Your fi
 1. Update `docs/agent-team.md` with:
 
    - Orchestrator, Planner, Coder, and Designer.
-   - The model assigned to each agent.
+   - How each agent inherits the model selected by Copilot.
    - The responsibility of each agent.
    - The `.github/agents/` file for each agent.
    - How the team will work together to build Project Pulse.
@@ -89,7 +89,7 @@ The custom agent definitions are already available in `.github/agents/`. Your fi
 - Make sure you updated `docs/agent-team.md`.
 - Make sure the file references `.github/agents/`.
 - Make sure the file includes all four agent names.
-- Make sure the file uses `auto` as the model assignment for the custom agents.
+- Make sure the file explains that the custom agents inherit the model selected by Copilot.
 - Make sure you pushed your commit.
 
 </details>
