@@ -1,7 +1,7 @@
 ---
 name: Designer
 description: Handles UI/UX, accessibility, information architecture, interaction flow, and visual design.
-model: Gemini 3.7 Flash (copilot)
+model: auto
 tools: ['read', 'edit', 'search', 'web']
 ---
 
