@@ -1,0 +1,32 @@
+{
+  "projects": [
+    {
+      "name": "Aurora",
+      "owner": "Maya Chen",
+      "status": "On track",
+      "recentActivity": "Design review completed today",
+      "priority": "High"
+    },
+    {
+      "name": "Orbit",
+      "owner": "Theo Martin",
+      "status": "At risk",
+      "recentActivity": "API integration blocked yesterday",
+      "priority": "Critical"
+    },
+    {
+      "name": "Lighthouse",
+      "owner": "Priya Singh",
+      "status": "In progress",
+      "recentActivity": "Accessibility testing started this week",
+      "priority": "Medium"
+    },
+    {
+      "name": "Canopy",
+      "owner": "Jon Bell",
+      "status": "Complete",
+      "recentActivity": "Release published two days ago",
+      "priority": "Low"
+    }
+  ]
+}

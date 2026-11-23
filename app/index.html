@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project Pulse</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="dashboard">
+      <header class="dashboard-header">
+        <div>
+          <p class="eyebrow">Team overview</p>
+          <h1>Project Pulse</h1>
+        </div>
+        <div class="dashboard-summary" aria-label="Dashboard summary">
+          <span id="project-count">0 projects</span>
+          <span class="summary-divider" aria-hidden="true"></span>
+          <span id="active-count">0 active</span>
+        </div>
+      </header>
+
+      <section aria-labelledby="projects-heading">
+        <div class="section-heading">
+          <h2 id="projects-heading">Projects</h2>
+          <p>Live status across Mona's team</p>
+        </div>
+        <div id="project-grid" class="project-grid" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script>
+      const statusClass = (status) =>
+        status.toLowerCase().replaceAll(" ", "-");
+
+      fetch("project-data.json")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Could not load project data.");
+          }
+          return response.json();
+        })
+        .then(({ projects }) => {
+          const grid = document.querySelector("#project-grid");
+          grid.replaceChildren(
+            ...projects.map((project) => {
+              const article = document.createElement("article");
+              article.className = "project-card";
+
+              const status = document.createElement("span");
+              status.className = `status-badge status-${statusClass(project.status)}`;
+              status.textContent = project.status;
+
+              const priority = document.createElement("span");
+              priority.className = `priority priority-${statusClass(project.priority)}`;
+              priority.textContent = `${project.priority} priority`;
+
+              article.innerHTML = `
+                <div class="card-top">
+                  <span class="project-icon" aria-hidden="true">${project.name.charAt(0)}</span>
+                  <div>
+                    <h3></h3>
+                    <p class="owner"></p>
+                  </div>
+                </div>
+                <dl>
+                  <div>
+                    <dt>Status</dt>
+                    <dd class="status-slot"></dd>
+                  </div>
+                  <div>
+                    <dt>Recent activity</dt>
+                    <dd class="recent-activity"></dd>
+                  </div>
+                </dl>
+              `;
+
+              article.querySelector("h3").textContent = project.name;
+              article.querySelector(".owner").textContent = `Owned by ${project.owner}`;
+              article.querySelector(".status-slot").append(status);
+              article.querySelector(".recent-activity").textContent = project.recentActivity;
+              article.append(priority);
+              return article;
+            })
+          );
+
+          document.querySelector("#project-count").textContent =
+            `${projects.length} projects`;
+          const active = projects.filter(
+            (project) => project.status !== "Complete"
+          ).length;
+          document.querySelector("#active-count").textContent =
+            `${active} active`;
+        })
+        .catch((error) => {
+          document.querySelector("#project-grid").innerHTML =
+            `<p class="error-message" role="alert">${error.message}</p>`;
+        });
+    </script>
+  </body>
+</html>
